@@ -53,7 +53,9 @@ if ingredients_list:
          st.write(smoothiefroot_response.status_code)
          if smoothiefroot_response.status_code == 200:
            sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)
+           st.write('200 if then')
          if smoothiefroot_response.status_code != 200:
+           st.write('not 200 if then')
            search_name_df = (
                     session.table("smoothies.public.fruit_options")
                     .filter(col("FRUIT_NAME") == fruit_chosen)
