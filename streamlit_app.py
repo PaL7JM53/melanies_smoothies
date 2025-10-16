@@ -33,7 +33,7 @@ my_dataframe = session.table("smoothies.public.fruit_options")
 # 2. Select the desired column(s)
 # Example: Selecting FRUIT_NAME and FRUIT_ID
 selected_dataframe = my_dataframe.select(
-    col("FRUIT_NAME")
+    col("FRUIT_NAME"),col('SEARCH_ON')
 )
 
 # 3. Display the result
