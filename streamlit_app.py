@@ -1,5 +1,6 @@
 # Import python packages
 import streamlit as st
+import pandas as pd
 #from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 import requests
@@ -38,6 +39,10 @@ selected_dataframe = my_dataframe.select(
 
 # 3. Display the result
 #st.dataframe(data=selected_dataframe, use_container_width=True)
+
+pd_df = selected_dataframe.to_pandas()
+st.dataframe(pd_df)
+st.stop()
 
 ingredients_list = st.multiselect("choose up to 5:",selected_dataframe,max_selections = 5)
 
