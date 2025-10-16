@@ -50,7 +50,17 @@ if ingredients_list:
          ingredients_string += fruit_chosen + ' '
          st.subheader(fruit_chosen + ' Nutrition')
          smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)
-         sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)
+         if smoothiefroot_response.status_code = 200:
+           sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)
+         if smoothiefroot_response.status_code != 200:
+           search_name_df = (
+                    session.table("smoothies.public.fruit_options")
+                    .filter(col("FRUIT_NAME") == fruit_chosen)
+                    .select(col("SEARCH_ON"))  )
+           search_name_result = search_name_df.collect()
+           alternate_search_term = search_name_result[0][0]
+           smoothiefrootAlter_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + alternate_search_term)
+           sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)
     st.write(ingredients_string)
 
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients,NAME_ON_ORDER)
