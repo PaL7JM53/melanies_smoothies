@@ -62,6 +62,7 @@ if ingredients_list:
                     .select(col("SEARCH_ON"))  )
            search_name_result = search_name_df.collect()
            alternate_search_term = search_name_result[0][0]
+           st.write("https://my.smoothiefroot.com/api/fruit/" + alternate_search_term)
            smoothiefrootAlter_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + alternate_search_term)
            sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)
     st.write(ingredients_string)
